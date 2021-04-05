@@ -17,11 +17,11 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, '../frontend/dist/hb-events-fe')));
+app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, '../frontend/dist/hb-events-fe')));
 
 app.get('/', function(req, res){
-  res.sendFile(path.join(__dirname, '../frontend/dist/hb-events-fe/index.html'))
+  res.sendFile(path.join(__dirname, 'public/index.html'))
 })
 
 
