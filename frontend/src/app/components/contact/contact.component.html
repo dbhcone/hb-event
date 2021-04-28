@@ -1,1 +1,72 @@
-<p>contact works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Contact Us</mat-card-title>
+    <mat-cart-subtitle>Enter your details below to reach us</mat-cart-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="contactUsForm" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="username"
+          placeholder="Enter your username"
+          required
+        />
+        <mat-error> </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          formControlName="email"
+          placeholder="Enter your email address"
+          required
+        />
+        <mat-error> </mat-error>
+      </mat-form-field>
+
+      <mat-form-field hintLabel="Max 30 characters">
+        <mat-label>Subject (A topical summary of your enquiry)</mat-label>
+        <input
+          matInput
+          #subject
+          formControlName="subject"
+          placeholder="Enter your subject here"
+          maxlength="30"
+        />
+        <mat-hint align="end">{{ subject.value?.length || 0 }}/30</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field hintLabel="Max 255 characters">
+        <mat-label>Subject (A topical summary of your enquiry)</mat-label>
+        <textarea
+          matInput
+          #maincontent
+          formControlName="message"
+          placeholder="Enter your message here"
+          maxlength="255"
+          rows="10"
+          required
+        ></textarea>
+
+        <mat-hint align="end"
+          >{{ maincontent.value?.length || 0 }}/255</mat-hint
+        >
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="accent"
+        type="submit"
+        [disabled]="!this.contactUsForm.valid"
+      >
+        Send Message
+      </button>
+    </form>
+  </mat-card-content>
+  <mat-card-footer> </mat-card-footer>
+</mat-card>

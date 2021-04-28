@@ -10,9 +10,9 @@ export class LoginComponent implements OnInit {
   /**
    * Properties
    */
-
+  errorMsg = null;
   loginForm = new FormGroup({
-    username: new FormControl("", [Validators.email, Validators.required]),
+    username: new FormControl("", [Validators.required]),
     password: new FormControl("", [
       Validators.required,
       Validators.minLength(8),

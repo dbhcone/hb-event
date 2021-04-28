@@ -5,29 +5,44 @@
   </mat-card-header>
   <mat-card-content>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <mat-error *ngIf="invalidLogin" id="invalidLogin">
-            {{errorMsg}}
-        </mat-error>
+      <mat-error *ngIf="invalidLogin" id="invalidLogin">
+        {{ errorMsg }}
+      </mat-error>
       <mat-form-field>
+        <mat-label>Username</mat-label>
         <input
           matInput
-          placeholder="username"
+          placeholder="Enter username"
           required
           formControlName="username"
+          type="text"
         />
       </mat-form-field>
       <mat-form-field>
+        <mat-label> Password </mat-label>
         <input
           matInput
-          placeholder="password"
+          type="password"
+          placeholder="Enter password"
           required
           formControlName="password"
         />
-        <mat-error>
-            <p *ngIf="">Please, provide a valid password</p>
-        </mat-error>
+        <mat-error> </mat-error>
       </mat-form-field>
-      <button mat-raised-button color="primary">Login</button>
+      <button
+        mat-raised-button
+        color="accent"
+        type="submit"
+        [disabled]="!this.loginForm.valid"
+      >
+        Login
+      </button>
     </form>
   </mat-card-content>
+  <mat-card-footer>
+    <p>
+      Don't have an account?
+      <a routerLink="/signup"> Sign up here</a>
+    </p>
+  </mat-card-footer>
 </mat-card>
