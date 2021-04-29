@@ -15,6 +15,8 @@ import { FourZeroFourComponent } from "./components/shared/four-zero-four/four-z
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { LayoutModule } from "@angular/cdk/layout";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ChartsModule } from "ng2-charts";
+import { NavigationComponent } from "./components/shared/navigation/navigation.component";
 // import { SwiperModule } from "swiper/angular";
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     AboutComponent,
     ContactComponent,
     FourZeroFourComponent,
+    NavigationComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
@@ -37,6 +40,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     LayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    ChartsModule,
     // ,SwiperModule
   ],
   providers: [],

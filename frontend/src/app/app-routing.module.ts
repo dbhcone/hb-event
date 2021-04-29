@@ -10,7 +10,7 @@ import { FourZeroFourComponent } from "./components/shared/four-zero-four/four-z
 import { AuthGuardService } from "./services/guards/auth-guard.service";
 
 const routes: Routes = [
-  { path: "", pathMatch: "full", redirectTo: "login" },
+  { path: "", pathMatch: "full", redirectTo: "home" },
   { component: HomeComponent, path: "" },
   { component: AboutComponent, path: "about" },
   {
