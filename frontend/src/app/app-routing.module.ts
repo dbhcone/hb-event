@@ -8,11 +8,13 @@ import { LoginComponent } from "./components/login/login.component";
 import { SignupComponent } from "./components/signup/signup.component";
 import { FourZeroFourComponent } from "./components/shared/four-zero-four/four-zero-four.component";
 import { AuthGuardService } from "./services/guards/auth-guard.service";
+import { DashboardComponent } from "./components/dashboard/dashboard.component";
 
 const routes: Routes = [
   { path: "", pathMatch: "full", redirectTo: "home" },
   { component: HomeComponent, path: "" },
   { component: AboutComponent, path: "about" },
+  { component: DashboardComponent, path: "dashboard" },
   {
     component: ContactComponent,
     path: "contact-us",

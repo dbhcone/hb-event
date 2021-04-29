@@ -17,6 +17,7 @@ import { LayoutModule } from "@angular/cdk/layout";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ChartsModule } from "ng2-charts";
 import { NavigationComponent } from "./components/shared/navigation/navigation.component";
+import { DashboardComponent } from "./components/dashboard/dashboard.component";
 // import { SwiperModule } from "swiper/angular";
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { NavigationComponent } from "./components/shared/navigation/navigation.c
     ContactComponent,
     FourZeroFourComponent,
     NavigationComponent,
+    DashboardComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
