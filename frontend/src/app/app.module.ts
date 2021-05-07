@@ -8,7 +8,6 @@ import { HomeComponent } from "./components/home/home.component";
 import { LoginComponent } from "./components/login/login.component";
 import { SignupComponent } from "./components/signup/signup.component";
 import { FooterComponent } from "./components/shared/footer/footer.component";
-import { NavbarComponent } from "./components/shared/navbar/navbar.component";
 import { AboutComponent } from "./components/about/about.component";
 import { ContactComponent } from "./components/contact/contact.component";
 import { FourZeroFourComponent } from "./components/shared/four-zero-four/four-zero-four.component";
@@ -18,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ChartsModule } from "ng2-charts";
 import { NavigationComponent } from "./components/shared/navigation/navigation.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
+import { EventsComponent } from "./components/events/events.component";
 // import { SwiperModule } from "swiper/angular";
 @NgModule({
   declarations: [
@@ -26,12 +26,12 @@ import { DashboardComponent } from "./components/dashboard/dashboard.component";
     LoginComponent,
     SignupComponent,
     FooterComponent,
-    NavbarComponent,
     AboutComponent,
     ContactComponent,
     FourZeroFourComponent,
     NavigationComponent,
     DashboardComponent,
+    EventsComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [

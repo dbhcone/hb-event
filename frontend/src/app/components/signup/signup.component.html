@@ -15,6 +15,7 @@
           formControlName="surname"
           placeholder="enter your surname here"
           required
+          (keyup)="handleUsernameSuggestion()"
         />
         <mat-error> </mat-error>
       </mat-form-field>
@@ -27,12 +28,19 @@
           formControlName="firstname"
           required
           placeholder="enter your first name"
+          (keyup)="handleUsernameSuggestion()"
         />
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Other Names (provide if any)</mat-label>
-        <input matInput type="text" placeholder="enter any other names" />
+        <input
+          matInput
+          formControlName="othernames"
+          type="text"
+          placeholder="enter any other names"
+          (keyup)="handleUsernameSuggestion()"
+        />
       </mat-form-field>
 
       <mat-form-field>
@@ -44,7 +52,7 @@
           placeholder="Enter email here"
           required
         />
-        <mat-error *ngIf="email.touched && email.invalid">
+        <!-- <mat-error *ngIf="email.touched && email.invalid">
           <mat-error *ngIf="email.errors.required">
             Email is required
           </mat-error>
@@ -55,15 +63,25 @@
             Email must be
             {{ email.errors.minlength.requiredLength }} characters or more
           </mat-error>
+        </mat-error> -->
+        <mat-error
+          *ngIf="email.hasError('email') && !email.hasError('required')"
+        >
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="email.hasError('required')">
+          Email is required
         </mat-error>
       </mat-form-field>
 
       <label>
-        <input type="radio" value="male" formControlName="gender" /> Male
+        <input type="radio" value="male" formControlName="gender" />Male
       </label>
       <label>
         <input type="radio" value="female" formControlName="gender" /> Female
       </label>
+      <!-- <mat-radio-button formControlName="gender">Malee</mat-radio-button>
+      <mat-radio-button formControlName="gender">Femalee</mat-radio-button> -->
 
       <mat-form-field>
         <input
@@ -76,25 +94,66 @@
         <mat-error> </mat-error>
       </mat-form-field>
 
-      <mat-form-field hintLabel="Max 64 characters">
-        <mat-label>Subject (A topical summary of your enquiry)</mat-label>
+      <mat-form-field hintLabel="Max {{ maxAddressCharacters }} characters">
+        <mat-label>Address </mat-label>
         <textarea
           matInput
-          #maincontent
+          #address
           formControlName="address"
-          placeholder="Enter your message here"
-          maxlength="64"
+          placeholder="Address Line 1 <br /> Address Line 2"
+          maxlength="{{ maxAddressCharacters }}"
           rows="5"
           required
         ></textarea>
 
-        <mat-hint align="end">{{ maincontent.value?.length || 0 }}/64</mat-hint>
+        <mat-hint align="end"
+          >{{ address.value?.length || 0 }} /
+          {{ maxAddressCharacters }}</mat-hint
+        >
       </mat-form-field>
 
+      <!-- Account Details Begin -->
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="username"
+          placeholder="enter username here"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          formControlName="password"
+          required
+          minlength="8"
+          maxlength="64"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Confirm Password</mat-label>
+        <input
+          matInput
+          type="password"
+          formControlName="confirmpassword"
+          required
+          minlength="8"
+          maxlength="64"
+        />
+      </mat-form-field>
+
+      <!-- Account Details End -->
       <button
         mat-raised-button
         color="accent"
         type="submit"
+        class="btn-block"
         [disabled]="!this.signUpForm.valid"
       >
         Signup

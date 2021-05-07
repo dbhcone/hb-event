@@ -16,6 +16,13 @@ export class NavigationComponent {
       shareReplay()
     );
 
-  menuItems = ["dashboard", "contact-us", "signup", "about", "login"];
+  menuItems = [
+    { name: "dashboard", icon: "dashboard" },
+    { name: "events", icon: "event" },
+    { name: "contact-us", icon: "contact_page" },
+    { name: "signup", icon: "manage_accounts" },
+    { name: "about", icon: "manage_accounts" },
+    { name: "login", icon: "login" },
+  ];
   constructor(private breakpointObserver: BreakpointObserver) {}
 }
