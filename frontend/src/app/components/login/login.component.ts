@@ -11,7 +11,7 @@ export class LoginComponent implements OnInit {
    * Properties
    */
   errorMsg = "some error message to be fetched from server";
-  invalidLogin = true;
+  invalidLogin = false;
   loginForm = new FormGroup({
     username: new FormControl("", [Validators.required]),
     password: new FormControl("", [
