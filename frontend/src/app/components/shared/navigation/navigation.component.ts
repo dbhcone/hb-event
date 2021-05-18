@@ -15,7 +15,7 @@ export class NavigationComponent {
       map((result) => result.matches),
       shareReplay()
     );
-
+  isTokenExpired = true;
   menuItems = [
     { name: "dashboard", icon: "dashboard" },
     { name: "events", icon: "event" },
@@ -25,4 +25,7 @@ export class NavigationComponent {
     { name: "login", icon: "login" },
   ];
   constructor(private breakpointObserver: BreakpointObserver) {}
+  logout() {
+    console.log("We are logging out");
+  }
 }
