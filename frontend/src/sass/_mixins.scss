@@ -1,0 +1,34 @@
+@import "./variables";
+
+@function get_font_weight() {
+  @return $font-weight-MuseoSans;
+}
+
+@function get_font_style($style) {
+  @if $style == "normal" {
+    @return $font-normal;
+  } @else if $style == "bold" {
+    @return $font-bold;
+  } @else if $style == "italic" {
+    @return $font-italic;
+  }
+}
+
+@function get_extension($format) {
+  @if $format == "woff" {
+    @return ".woff";
+  } @else if $format == "opentype" {
+    @return ".otf";
+  }
+}
+
+@mixin font_face($family, $format, $style, $font-weight) {
+  @font-face {
+    font-family: $family;
+    src: url("#{$base-font-url}/#{$family}_#{$font-weight}#{get_extension($format)}")
+      format($format);
+    font-weight: $font-weight;
+    font-style: get_font_style($style);
+    font-stretch: get_font_style($style);
+  }
+}

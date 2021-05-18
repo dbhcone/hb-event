@@ -42,62 +42,6 @@
       <span>HB Events & Ushering</span>
     </mat-toolbar>
 
-    <mat-toolbar class="mat-elevation-z8" fxLayout="row">
-      <div fxHide.gt-xs>
-        <button mat-icon-button (click)="drawer.toggle()">
-          <mat-icon class="menu">menu</mat-icon>
-        </button>
-      </div>
-      <a routerLink="/"
-        ><span class="logo"
-          ><mat-icon color="primary">eco</mat-icon>HB Events</span
-        ></a
-      >
-      <div class="spacer"></div>
-      <div fxFlex fxLayoutAlign="end" fxHide.xs>
-        <ul fxLayout fxLayoutGap="15px" class="='navigation-items">
-          <li>
-            <a routerLink="/about">ABOUT US</a>
-          </li>
-          <li>
-            <a routerLink="/marketplace">MARKETPLACE</a>
-          </li>
-          <li>
-            <a routerLink="/banner-exhange">BANNER EXCHANGE</a>
-          </li>
-          <li>
-            <a routerLink="/publisher-dashboard">PUBLISHER</a>
-          </li>
-          <li>
-            <a routerLink="/advertiser">ADVERTISER</a>
-          </li>
-          <li>
-            <a routerLink="/deposit-withdrawal">DEPOSIT/WITHDRAWAL</a>
-          </li>
-          <li>
-            <a routerLink="/contact">CONTACT US</a>
-          </li>
-        </ul>
-      </div>
-      <div class="spacer"></div>
-      <div [ngSwitch]="isTokenExpired">
-        <div *ngSwitchCase="false">
-          <button mat-button [matMenuTriggerFor]="menu">
-            Hi, {{ username }}!<mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="logout()">
-              <mat-icon>logout</mat-icon>
-              <span>Logout</span>
-            </button>
-          </mat-menu>
-        </div>
-        <a *ngSwitchDefault mat-button routerLink="/login"
-          ><mat-icon matPrefix>account_circle</mat-icon>SIGN IN</a
-        >
-      </div>
-    </mat-toolbar>
-
     <router-outlet></router-outlet>
     <!-- Add Content Here -->
   </mat-sidenav-content>
