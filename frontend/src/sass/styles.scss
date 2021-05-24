@@ -77,4 +77,21 @@ h6 {
   background: #ff4081;
 }
 
+.bg-img {
+  background: url("../assets/hb_events/main_image_1.jpg") no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-img-fixed {
+  background: url("../assets/hb_events/main_image_2.jpg") no-repeat left top
+    fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 /*#endregion*/

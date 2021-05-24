@@ -1,0 +1,279 @@
+<p>cart works!</p>
+
+<div class="shopping-cart with-header">
+  <div class="cart-container">
+    <!-- Scroll Up -->
+    <div class="cart-up-scroll" *ngIf="scroll" (click)="scrollUp()">
+      <div class="cart__up-arrow"></div>
+    </div>
+
+    <!-- <div class="cart-container" (swipeup)="sliderUp()" (swipedown)="sliderDown()"></div> -->
+    <div
+      #cartiteminner
+      class="cart-item_inner"
+      (resized)="onCartResized($event)"
+    >
+      <div class="cart-item" *ngFor="let purchase of displayedpurchases">
+        <div *ngIf="purchase.sale === false">
+          <div class="cart-item__header grid">
+            <!-- <h1 class="cart-item__header-quantity column notranslate">
+                            {{ purchase.quantity }}x
+                        </h1> -->
+            <h4
+              class="cart-item__header-text column"
+              [innerHtml]="decode(purchase.name)"
+            ></h4>
+            <div class="cart-item__header-price right-column">
+              <h1 class="cart-item__header-value">
+                {{ purchase.subtotal }}. }}<span class="supsub">
+                  <sup class="superscript">{{ purchase.subtotal }}</sup>
+                  <sub class="subscript">€</sub>
+                </span>
+              </h1>
+            </div>
+          </div>
+          <div *ngIf="purchase.subtitle" class="cart-item__subtitle">
+            <h3 class="cart-item__subtitle-text">{{ purchase.subtitle }}</h3>
+          </div>
+
+          <div class="dottedline">
+            <hr />
+          </div>
+
+          <div
+            [className]="
+              isNaN(totalPrice)
+                ? 'userEventBlock cart-item__content-container'
+                : 'userEventUnblock cart-item__content-container'
+            "
+          >
+            <div class="cart-item__column">
+              <div class="cart-item__content">
+                <table style="width: 100%">
+                  <tr>
+                    <th></th>
+                    <!-- Product name -->
+                    <th></th>
+                    <!-- Quantity increments -->
+                    <th></th>
+                    <!-- Product price -->
+                    <th></th>
+                    <!-- Delete button -->
+                    <th></th>
+                    <!-- Edit button -->
+                  </tr>
+                  <tbody>
+                    <!-- primary purchase -->
+                    <!-- <tr>
+                                        <td width="35%" class="cart-item__content-text"
+                                            [innerHtml]="purchase.name | cleanHtml"></td>
+                                        <td width="20%"></td>
+                                        <td width="15%" class="cart-item__content-text cart-item-price">{{ purchase.price 
+                                    }}{{ purchase.price }}
+                                            €</td>
+                                            <td width="15%">
+                                                <button type="button" class="cart-item__footer-btn" (click)="removeProduct(purchase)" >
+                                                    {{ "GLOBAL.DELETE" | translate }}
+                                                </button>
+                                            </td>
+                                            <td width="15%">
+                                                <button type="button" class="cart-item__footer-btn">
+                                                    {{ "GLOBAL.EDIT" | translate }}
+                                                </button>
+                                            </td>
+                                    </tr> -->
+                    <!-- end of primary purchase -->
+
+                    <!-- related products -->
+                    <tr *ngFor="let relprod of purchase.relatedproducts">
+                      <td
+                        width="70%"
+                        style="width: 75%"
+                        class="cart-item__content-text"
+                        [innerHtml]="decode(relprod.name)"
+                      ></td>
+                      <td
+                        width="30%"
+                        class="cart-item__content-text cart-item-price"
+                      >
+                        {{ relprod.price }}, }}{{ relprod.price }}
+                        €
+                      </td>
+                    </tr>
+                    <!-- end of related products -->
+
+                    <!-- suggestive sales -->
+                    <tr *ngFor="let sale of getChildPurchases(purchase)">
+                      <td
+                        width="35%"
+                        class="cart-item__content-text"
+                        [innerHtml]="decode(sale.name)"
+                      ></td>
+                      <!-- Product name -->
+                      <td width="20%">
+                        <div
+                          *ngIf="sale.canIncrease === true"
+                          class="cart-item__incdec"
+                        >
+                          <button
+                            class="cart-item__incdec-both {{
+                              sale.quantity === 1 ? 'cart-fade-out-btn' : ''
+                            }}"
+                            (click)="decrementQuantity(sale)"
+                          >
+                            <img
+                              alt="Decrease button"
+                              src="assets/img/tabilo/global/add_sub/subtract.png"
+                              srcset="
+                                assets/img/tabilo/global/add_sub/subtract@2x.png 2x,
+                                assets/img/tabilo/global/add_sub/subtract@3x.png 3x
+                              "
+                            />
+                          </button>
+                          <input
+                            type="text"
+                            value="{{ sale.quantity }}"
+                            class="cart-item__input"
+                            min="1"
+                            #countInput
+                            (change)="countChange(sale.id, countInput.value)"
+                          />
+                          <button
+                            class="cart-item__incdec-both"
+                            (click)="incrementQuantity(sale)"
+                          >
+                            <img
+                              alt="Increase button"
+                              src="assets/img/tabilo/global/add_sub/add-g.png"
+                              srcset="
+                                assets/img/tabilo/global/add_sub/add-g@2x.png 2x,
+                                assets/img/tabilo/global/add_sub/add-g@3x.png 3x
+                              "
+                            />
+                          </button>
+                        </div>
+                      </td>
+                      <!-- Quantity increments -->
+                      <td width="15%">
+                        <div
+                          *ngIf="sale.canIncrease === true"
+                          class="cart-item__content-text cart-item-price"
+                        >
+                          {{ sale.total() }},{{ sale.total() }} €
+                        </div>
+                      </td>
+                      <!-- Product price -->
+                      <td width="15%" (click)="showCancelOverlay(sale)">
+                        <button type="button" class="cart-item__footer-btn">
+                          DELETE
+                        </button>
+                      </td>
+                      <td width="15%">
+                        <button
+                          (click)="editProduct(sale)"
+                          *ngIf="sale.canEdit === true"
+                          type="button"
+                          class="cart-item__footer-btn"
+                        >
+                          EDIT
+                        </button>
+                      </td>
+                    </tr>
+                    <!-- end of suggestive sales -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="cart-item__footer">
+            <div class="cart-item__footer-btn-container-left">
+              <button
+                type="button"
+                (click)="removeProduct(purchase)"
+                class="cart-item__footer-btn"
+              >
+                REMOVE
+              </button>
+            </div>
+            <!-- <div class="cart-item__footer-btn-container-right">
+                            <button type="button" (click)="editProduct(purchase)" class="cart-item__footer-btn">
+                                {{ "GLOBAL.EDIT" | translate }}
+                            </button>
+                        </div> -->
+          </div>
+
+          <div class="dottedline">
+            <hr />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cart-down-scroll" *ngIf="scroll" (click)="scrollDown()">
+      <!-- <button class="scroll-btn {{ blinkOn? 'show-arrow' : 'hide-arrow' }}">
+                <img src="assets/img/tabilo/global/scroll/path-3.png" srcset="
+                        assets/img/tabilo/global/scroll/path-3@2x.png 2x,
+                        assets/img/tabilo/global/scroll/path-3@3x.png 3x
+                    " class="Path-3" />
+            </button> -->
+      <div class="cart__down-arrow"></div>
+    </div>
+  </div>
+
+  <div class="cart-bottom">
+    <!-- <div class="dottedline">
+            <hr />
+        </div>  -->
+    <div *ngIf="!concealCartTotalsAndButton" class="grid">
+      <div class="cart-total right-column">
+        <div class="cart-total__content">
+          <h3 class="sub-total">
+            {{ subtotal }}{{ subtotal }}
+            €
+          </h3>
+
+          <div *ngIf="showSanifairComponent" class="sanifair-sub-total">
+            <h3
+              class="column cart-total-amount-before-text__sanifair"
+              translate
+            >
+              CART_PAGE.DISCOUNT
+            </h3>
+            <h3 class="sub-total">
+              {{ getSanifairTotal() }}{{ getSanifairTotal() }}
+              €
+            </h3>
+          </div>
+        </div>
+        <div class="grid cart-total__footer">
+          <h3 class="column cart-total-amount-before-text" translate>
+            GLOBAL.TOTAL_AMOUNT
+          </h3>
+          <h3 *ngIf="!isNaN(totalPrice)" class="column cart-total-amount">
+            {{ totalPrice }}{{ totalPrice }}
+            €
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div class="cart-bottom-page-buttons">
+      <button
+        type="button"
+        class="cart__back-btn"
+        (click)="backToMenuSelection()"
+      >
+        <img
+          src="assets/img/tabilo/global/arrow/back-green.png"
+          srcset="
+            assets/img/tabilo/global/arrow/back-green@2x.png 2x,
+            assets/img/tabilo/global/arrow/back-green@3x.png 3x
+          "
+          alt="Back arrow - tabilo"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+<div *ngIf="scroll" class="cart__bottom-black-fade"></div>
+<app-prod-cancel-overlay *ngIf="promptCancelProduct"></app-prod-cancel-overlay>

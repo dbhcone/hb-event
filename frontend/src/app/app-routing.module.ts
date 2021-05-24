@@ -10,21 +10,23 @@ import { FourZeroFourComponent } from "./components/shared/four-zero-four/four-z
 import { AuthGuardService } from "./services/guards/auth-guard.service";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { EventsComponent } from "./components/events/events.component";
+import { CartComponent } from "./components/cart/cart.component";
 
 const routes: Routes = [
   { path: "", pathMatch: "full", redirectTo: "home" },
-  { component: HomeComponent, path: "" },
-  { component: AboutComponent, path: "about" },
-  { component: DashboardComponent, path: "dashboard" },
-  { component: EventsComponent, path: "events" },
+  { path: "", component: HomeComponent },
+  { path: "cart", component: CartComponent },
+  { path: "about", component: AboutComponent },
+  { path: "dashboard", component: DashboardComponent },
+  { path: "events", component: EventsComponent },
   {
-    component: ContactComponent,
     path: "contact-us",
+    component: ContactComponent,
     // canActivate: [AuthGuardService],
   },
-  { component: LoginComponent, path: "login" },
-  { component: SignupComponent, path: "signup" },
-  { component: FourZeroFourComponent, path: "404" },
+  { path: "login", component: LoginComponent },
+  { path: "signup", component: SignupComponent },
+  { path: "404", component: FourZeroFourComponent },
   { path: "**", redirectTo: "/404" },
 ];
 

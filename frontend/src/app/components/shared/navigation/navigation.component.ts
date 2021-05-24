@@ -17,7 +17,7 @@ export class NavigationComponent {
     );
   isTokenExpired = true;
   menuItems = [
-    { name: "dashboard", icon: "dashboard" },
+    // { name: "dashboard", icon: "dashboard" },
     { name: "events", icon: "event" },
     { name: "contact-us", icon: "contact_page" },
     { name: "signup", icon: "manage_accounts" },

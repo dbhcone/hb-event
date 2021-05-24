@@ -18,6 +18,9 @@ import { ChartsModule } from "ng2-charts";
 import { NavigationComponent } from "./components/shared/navigation/navigation.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { EventsComponent } from "./components/events/events.component";
+import { CartComponent } from "./components/cart/cart.component";
+import { ShoppingCartModule } from "ng-shopping-cart";
+import { PurchaseItem } from "./helpers/purchaseitem.helper";
 // import { SwiperModule } from "swiper/angular";
 @NgModule({
   declarations: [
@@ -32,6 +35,7 @@ import { EventsComponent } from "./components/events/events.component";
     NavigationComponent,
     DashboardComponent,
     EventsComponent,
+    CartComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
@@ -43,6 +47,14 @@ import { EventsComponent } from "./components/events/events.component";
     FormsModule,
     ReactiveFormsModule,
     ChartsModule,
+    ShoppingCartModule.forRoot({
+      itemType: PurchaseItem,
+      serviceType: "localStorage",
+      serviceOptions: {
+        storageKey: "NgShoppingCart",
+        clearOnError: true,
+      },
+    }),
     // ,SwiperModule
   ],
   providers: [],
