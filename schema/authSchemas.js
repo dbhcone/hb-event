@@ -20,7 +20,7 @@ const signupSchema = Joi.object({
 
 const account_activation_Schema = Joi.object({
   email: Joi.string().email().required().min(3),
-  temp_code: Joi.string().min(4).max(4).required().regex(/[0-9]/),
+  temp_code: Joi.string().min(6).max(6).required().regex(/[0-9]/),
   token: Joi.string(),
 });
 

@@ -1,0 +1,78 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
+    <mat-toolbar color="accent">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Menu</span>
+    </mat-toolbar>
+    <mat-nav-list>
+      <div *ngFor="let menuItem of menuItems">
+        <a mat-list-item [routerLink]="'/' + menuItem.name"
+          ><mat-icon matPrefix aria-label="">{{ menuItem.icon }}</mat-icon>
+          {{ menuItem.name | titlecase }}
+        </a>
+
+        <mat-divider></mat-divider>
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="accent">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>HB Events & Services</span>
+      <!-- Nav Tabs -->
+      <!-- <nav mat-tab-nav-bar [backgroundColor]="red">
+        <a
+          mat-tab-link
+          *ngFor="let menuItem of menuItems"
+          (click)="activeLink = menuItem.name"
+          [active]="activeLink == menuItem.name"
+          [routerLink]="'/' + menuItem.name"
+        >
+          {{ menuItem.name }}
+        </a>
+         <a mat-tab-link disabled>Disabled Link</a>
+      </nav> -->
+
+      <!-- Nav Tabs End -->
+      <div class="spacer"></div>
+      <!-- <a mat-button routerLink="/cart"
+        ><mat-icon>shopping_cart</mat-icon
+        ><span class="badge badge-light">3</span></a
+      > -->
+      <a
+        mat-button
+        routerLink="/cart"
+        mat-raised-button
+        color="primary"
+        matBadge="8"
+        matBadgePosition="after"
+      >
+        <mat-icon>shopping_cart</mat-icon>
+      </a>
+    </mat-toolbar>
+
+    <router-outlet></router-outlet>
+    <!-- Add Content Here -->
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -24,6 +24,20 @@ export class NavigationComponent {
     { name: "about", icon: "manage_accounts" },
     { name: "login", icon: "login" },
   ];
+
+  // left and right
+  leftMenuItems = [
+    { displayName: "Events", route: "events", icon: "event" },
+    { displayName: "Gallery", route: "gallery", icon: "gallery" },
+    { displayName: "About Us", route: "about", icon: "event" },
+    { displayName: "Contact Us", route: "events", icon: "contact_page" },
+  ];
+
+  rightMenuItems = [
+    { displayName: "Login", route: "login", icon: "login" },
+    { displayName: "Register", route: "signup", icon: "manage_accounts" },
+  ];
+
   constructor(private breakpointObserver: BreakpointObserver) {}
   logout() {
     console.log("We are logging out");
