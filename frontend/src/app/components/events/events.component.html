@@ -11,9 +11,7 @@
       {{ event.title }}
     </mat-card> -->
 <div  *ngFor="let event of events" class="col-md-4">
-    <mat-card style="max-width: 400px;"
-      class="p-2"
-    >
+    <mat-card class="m-1">
       <mat-card-header>
         <div mat-card-avatar class="event-header-image"></div>
         <mat-card-title>{{ event.title }}</mat-card-title>
