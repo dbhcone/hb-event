@@ -41,7 +41,7 @@ export class EventsComponent implements OnInit {
   generateStaticEvents(): void {
     for (let i = 1; i <= 10; i++) {
       const event: Event = {
-        id: 1,
+        id: i,
         title: `Event ${i}`,
         date: "2018-05-19",
         speaker: `Speaker ${i}`,

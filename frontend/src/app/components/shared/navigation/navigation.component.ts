@@ -29,8 +29,8 @@ export class NavigationComponent {
   leftMenuItems = [
     { displayName: "Events", route: "events", icon: "event" },
     { displayName: "Gallery", route: "gallery", icon: "gallery" },
-    { displayName: "About Us", route: "about", icon: "event" },
-    { displayName: "Contact Us", route: "events", icon: "contact_page" },
+    { displayName: "About Us", route: "about", icon: "about" },
+    { displayName: "Contact Us", route: "contact-us", icon: "contact_page" },
   ];
 
   rightMenuItems = [
