@@ -10,23 +10,27 @@ import { FourZeroFourComponent } from "./components/shared/four-zero-four/four-z
 import { AuthGuardService } from "./services/guards/auth-guard.service";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { EventsComponent } from "./components/events/events.component";
+import { EventComponent } from "./components/events/event.component";
 import { CartComponent } from "./components/cart/cart.component";
 import { NavigationComponent } from "./components/shared/navigation/navigation.component";
+import { GalleryComponent } from "./components/gallery/gallery.component";
 
 const routes: Routes = [
-  { path: "", redirectTo: "home", pathMatch: "full" },
+  { path: "home", redirectTo: "", pathMatch: "full" },
   {
     path: "",
     component: NavigationComponent,
     children: [
-      { path: "home", component: HomeComponent },
+      { path: "", component: HomeComponent },
       { path: "events", component: EventsComponent },
+      { path: "events/:id", component: EventComponent },
       { path: "cart", component: CartComponent },
       { path: "about", component: AboutComponent },
       { path: "signup", component: SignupComponent },
       { path: "login", component: LoginComponent },
       { path: "logout", redirectTo: "login" },
       { path: "contact-us", component: ContactComponent },
+      { path: "gallery", component: GalleryComponent },
     ],
   },
   { path: "dashboard", component: DashboardComponent },

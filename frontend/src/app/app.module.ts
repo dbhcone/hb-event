@@ -18,9 +18,11 @@ import { ChartsModule } from "ng2-charts";
 import { NavigationComponent } from "./components/shared/navigation/navigation.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { EventsComponent } from "./components/events/events.component";
+import { EventComponent } from "./components/events/event.component";
 import { CartComponent } from "./components/cart/cart.component";
 import { ShoppingCartModule } from "ng-shopping-cart";
 import { PurchaseItem } from "./helpers/purchaseitem.helper";
+import { GalleryComponent } from "./components/gallery/gallery.component";
 // import { SwiperModule } from "swiper/angular";
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { PurchaseItem } from "./helpers/purchaseitem.helper";
     NavigationComponent,
     DashboardComponent,
     EventsComponent,
+    EventComponent,
     CartComponent,
+    GalleryComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [

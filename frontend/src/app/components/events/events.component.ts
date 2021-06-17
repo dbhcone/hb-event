@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { TextFormat } from "src/app/helpers/textformat.helper";
 import { Event } from "src/app/models/event";
 
 @Component({
@@ -32,29 +34,34 @@ export class EventsComponent implements OnInit {
     `Dave watched as the forest burned up on the hill, only a few miles from her house. The car had been hastily packed and Marta was inside trying to round up the last of the pets. Dave went through his mental list of the most important papers and documents that they couldn't leave behind. He scolded himself for not having prepared these better in advance and hoped that he had remembered everything that was needed. He continued to wait for Marta to appear with the pets, but she still was nowhere to be seen`,
   ];
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.generateStaticEvents();
   }
 
   generateStaticEvents(): void {
-    for (let i = 1; i <= 10; i++) {
-      const event: Event = {
-        id: i,
-        title: `Event ${i}`,
+    for (let i = 0; i < 10; i++) {
+      const position = i + 1;
+      const event: Event= {
+        id: position,
+        title: `Event ${position}`,
         date: "2018-05-19",
-        speaker: `Speaker ${i}`,
-        venue: `Venue ${i}`,
+        speaker: `Speaker ${position}`,
+        venue: `Venue ${position}`,
         time: "13:00 GMT",
         details: {
           theme: "This is the theme 01",
           special_guest: "Paapa Yesu Kristo",
         },
-        description: this.randomParagraphs[9],
-        image: `event_${i}.jpg`,
+        description: TextFormat.truncate(this.randomParagraphs[i], 150),
+        image: `event_${position}.jpg`
       };
       this.events.push(event);
     }
+  }
+
+  eventDetails(event: Event) {
+    this.router.navigate(['/events', event.id], {state: {data: event}});
   }
 }

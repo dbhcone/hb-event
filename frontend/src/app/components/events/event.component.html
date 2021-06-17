@@ -1,0 +1,9 @@
+<section *ngIf="data">
+    <h2 class="text-success">We have data here</h2>
+    <p>{{stringifyData()}}</p>
+</section>
+<section *ngIf="!data">
+    <p class="text-danger">
+        We do NOT have data
+    </p>
+</section>

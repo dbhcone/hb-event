@@ -11,4 +11,5 @@ export interface Event {
     special_guest: string;
   };
   description: string;
+  avatar?: string;
 }
