@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { TextFormat } from "src/app/helpers/textformat.helper";
 import { Event } from "src/app/models/event";
@@ -9,6 +9,8 @@ import { Event } from "src/app/models/event";
   styleUrls: ["./events.component.scss"],
 })
 export class EventsComponent implements OnInit {
+
+  @Input() size: number;
   // static data
   events: Event[] = [];
 
@@ -37,10 +39,10 @@ export class EventsComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    this.generateStaticEvents();
+    this.generateStaticEvents(this.size);
   }
 
-  generateStaticEvents(): void {
+  generateStaticEvents(size?: number): void {
     for (let i = 0; i < 10; i++) {
       const position = i + 1;
       const event: Event= {
@@ -58,6 +60,11 @@ export class EventsComponent implements OnInit {
         image: `event_${position}.jpg`
       };
       this.events.push(event);
+
+      // if there was a size, then pick the n size
+      if (size) {
+        this.events = this.events.slice(0, size);
+      }
     }
   }
 

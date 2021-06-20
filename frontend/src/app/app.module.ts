@@ -23,6 +23,8 @@ import { CartComponent } from "./components/cart/cart.component";
 import { ShoppingCartModule } from "ng-shopping-cart";
 import { PurchaseItem } from "./helpers/purchaseitem.helper";
 import { GalleryComponent } from "./components/gallery/gallery.component";
+import {UpcomingComponent} from './components/events/upcoming/upcoming.component'
+import { SuggestedComponent } from "./components/events/suggested/suggested.component";
 // import { SwiperModule } from "swiper/angular";
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { GalleryComponent } from "./components/gallery/gallery.component";
     EventsComponent,
     EventComponent,
     CartComponent,
-    GalleryComponent
+    GalleryComponent,
+    UpcomingComponent,
+    SuggestedComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
