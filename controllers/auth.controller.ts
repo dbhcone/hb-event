@@ -3,13 +3,15 @@ const { md5 } = require("md5js");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
+import {Request, Response, NextFunction} from 'express';
+
 //Import TempUser and TempAccount Schemas
 const TempUser = require("../models/tempusers");
 const TempAccounts = require("../models/tempaccounts");
 
 //Import User and Account Schemas
-const Users = require("../models/users");
-const Accounts = require("../models/accounts");
+const Users = require("../models/user.model");
+const Accounts = require("../models/account.model");
 
 //Import Reset Schema
 const Reset = require("../models/resets");
@@ -17,8 +19,6 @@ const Reset = require("../models/resets");
 //Import Token Functions
 const authToken = require("../helpers/tokenfunctions");
 
-//Import Shemas
-const validate = require("../schema/authSchemas");
 
 //Import Nodemailer
 const sendMail = require("../helpers/mailer");
@@ -26,19 +26,19 @@ const { isValidObjectId } = require("mongoose");
 const { token } = require("morgan");
 
 //Import auth Controller functions
-const authController = require("../controllers/authController");
+const authController = require("../controllers/auth.controller");
 
 //===================================================================================================================//
 //                                       {Sign Up Endpoint}
 //===================================================================================================================//
-const signup = async (req, res) => {
+const signup = async (req: Request, res: Response) => {
   //Check if the payload is not empty
   if (!req.body.account)
     return res.status(404).json({ error: "signup object is empty" });
 
   //Validate Sign Up Payload
   try {
-    await validate.signupSchema.validateAsync(req.body);
+    // await validate.signupSchema.validateAsync(req.body);
 
     const account = req.body.account;
 
@@ -66,7 +66,7 @@ const signup = async (req, res) => {
     );
 
     //Generate random digit Code
-    const getRandomNumber = (digit) => {
+    const getRandomNumber = (digit: number) => {
       return Math.random().toFixed(digit).split(".")[1];
     };
     const temp_code = getRandomNumber(6);
@@ -85,7 +85,7 @@ const signup = async (req, res) => {
     //     // Store hash in your password DB.
     // });
     const salt = bcrypt.genSaltSync(saltRounds);
-    const hash = bcrypt.hashSync(myPlaintextPassword, salt);
+    const hash = bcrypt.hashSync("myPlaintextPassword", salt);
     const temp_user_object = {
       email: account.email,
       username: account.username,
@@ -130,14 +130,14 @@ const signup = async (req, res) => {
 //===================================================================================================================//
 //                                      {Login Endpoint}
 //===================================================================================================================//
-const login = async (req, res, next) => {
+const login = async (req: Request, res: Response, next: NextFunction) => {
   //Check if the payload is not empty
   if (!req.body.users)
     return res.status(404).json({ error: "users object is empty" });
 
   try {
     //Validate
-    await validate.login_Schema.validateAsync(req.body);
+    // await validate.login_Schema.validateAsync(req.body);
     const user = req.body.users;
 
     //find User
@@ -164,7 +164,7 @@ const login = async (req, res, next) => {
 //===================================================================================================================//
 //                                      {Account Activation Endpoint}
 //===================================================================================================================//
-const accountActivation = async (req, res) => {
+const accountActivation = async (req: Request, res: Response) => {
   //Check if the payload is not empty
   if (!req.body.temp_user)
     return res
@@ -173,9 +173,9 @@ const accountActivation = async (req, res) => {
 
   try {
     //Validate temp_user
-    await validate.account_activation_Schema.validateAsync(req.body.temp_user);
+    // await validate.account_activation_Schema.validateAsync(req.body.temp_user);
 
-    const bearerHeader = req.headers["authorization"];
+    const bearerHeader = <string>req.headers["authorization"];
     const bearerToken = bearerHeader.split(" ")[1];
     const token = bearerToken.split('"')[0];
     if (!bearerToken) return res.status(404).send({ error: "Token empty" });
@@ -252,7 +252,7 @@ const accountActivation = async (req, res) => {
 //===================================================================================================================//
 //                                      {Password Reset Enpoint}
 //===================================================================================================================//
-const passwordReset = async (req, res) => {
+const passwordReset = async (req: Request | any, res: Response) => {
   //Check if the payload is not empty
   if (!req.body.password_reset)
     return res
@@ -261,9 +261,9 @@ const passwordReset = async (req, res) => {
 
   try {
     //validate
-    await validate.password_reset.validateAsync(req.body);
+    // await validate.password_reset.validateAsync(req.body);
 
-    const bearerHeader = req.headers["authorization"];
+    const bearerHeader = <string>req.headers["authorization"];
     const bearerToken = bearerHeader.split(" ")[1];
     if (!bearerToken) return res.status(404).send({ error: "Token empty" });
     req.token = bearerToken.split('"')[0];
@@ -299,7 +299,7 @@ const passwordReset = async (req, res) => {
 //===================================================================================================================//
 //                                      {Forgot Password Endpoint}
 //===================================================================================================================//
-const forgotPassword = async (req, res) => {
+const forgotPassword = async (req: Request, res: Response) => {
   //Check if the payload is not empty
   //if(!req.body) return res.status(404).json({error: "email object is empty"});
   if (!req.body.email)
@@ -308,7 +308,7 @@ const forgotPassword = async (req, res) => {
   try {
     //validate Email
     //await validate.forgot_Password_Schema.validateAsync(req.body.email);
-    await validate.forgot_Password_Schema.validateAsync(req.body);
+    // await validate.forgot_Password_Schema.validateAsync(req.body);
     const email = req.body.email;
     console.log(email);
 
@@ -341,7 +341,7 @@ const forgotPassword = async (req, res) => {
 //===================================================================================================================//
 //                                 {drop user and account collection Endpoint}
 //===================================================================================================================//
-const mainAccounts = async (req, res, next) => {
+const mainAccounts = async (req: Request, res: Response, next: NextFunction) => {
   try {
     //
     const usersCollection = await Users.remove();
@@ -358,7 +358,7 @@ const mainAccounts = async (req, res, next) => {
 //===================================================================================================================//
 //                                 {drop temp-user and temp-account collection Endpoint}
 //===================================================================================================================//
-const tempAccounts = async (req, res, next) => {
+const tempAccounts = async (req: Request, res: Response, next: NextFunction) => {
   try {
     //
     const tempUserCollection = await TempUser.remove();

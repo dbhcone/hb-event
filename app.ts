@@ -1,21 +1,22 @@
-require("dotenv/config");
+// require("dotenv/config");
+import config from "config";
+
 var createError = require("http-errors");
-var express = require("express");
+// import createError from 'http-errors';
 const cors = require("cors");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-const auth = require("./routes/auth");
-const publisher = require("./routes/publisher/adSpace");
-const advertiser = require("./routes/advertiser/ads");
-const contactus = require("./routes/contactus");
-const marketPlace = require("./routes/marketPlace");
-const anad = require("./routes/anad");
-const mongoose = require("mongoose");
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+// const auth = require("./routes/auth");
+import { authRouter } from "./routes/auth";
 
+import {contactusRouter} from "./routes/contactus";
+
+// import mongoose from 'mongoose'
+import mongoose from "mongoose";
+
+import express, { Request, Response, NextFunction } from "express";
 var app = express();
 app.use(cors());
 
@@ -29,29 +30,20 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-// app.get('^(?!/api/)', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'public/index.html'));
-// });
-app.get("**", (req, res) => {
+app.get("**", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
-app.use("/", indexRouter);
-app.use("/api/users", usersRouter);
-app.use("/api/auth", auth);
-app.use("/api/marketplace", marketPlace);
-app.use("/api/publisher", publisher);
-app.use("/api/advertiser", advertiser);
-app.use("/api/fetch", anad);
-app.use("/api/", contactus);
+app.use("/api/auth", authRouter);
+app.use("/api/", contactusRouter);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
+app.use(function (req: Request, res: Response, next: NextFunction) {
+  next: createError(404);
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
@@ -61,16 +53,20 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
+let connectionString = <string>config.get("CONNSTR");
+console.log(connectionString);
+
 try {
   mongoose.connect(
-    process.env.MONGODB_URI,
+    // <string>process.env.MONGODB_URI,
+    connectionString,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
       useFindAndModify: false,
     },
-    (err) => {
+    (err: any ) => {
       if (err) {
         console.log({ error: err.message });
       } else {

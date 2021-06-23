@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-suggested',
+  selector: 'event-suggested',
   templateUrl: './suggested.component.html',
   styleUrls: ['./suggested.component.scss']
 })

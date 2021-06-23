@@ -25,7 +25,8 @@ import { PurchaseItem } from "./helpers/purchaseitem.helper";
 import { GalleryComponent } from "./components/gallery/gallery.component";
 import {UpcomingComponent} from './components/events/upcoming/upcoming.component'
 import { SuggestedComponent } from "./components/events/suggested/suggested.component";
-// import { SwiperModule } from "swiper/angular";
+import { LatestComponent } from "./components/events/latest/latest.component";
+import { SwiperModule } from "swiper/angular";
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +44,8 @@ import { SuggestedComponent } from "./components/events/suggested/suggested.comp
     CartComponent,
     GalleryComponent,
     UpcomingComponent,
-    SuggestedComponent
+    SuggestedComponent,
+    LatestComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
@@ -63,7 +65,7 @@ import { SuggestedComponent } from "./components/events/suggested/suggested.comp
         clearOnError: true,
       },
     }),
-    // ,SwiperModule
+    SwiperModule
   ],
   providers: [],
   bootstrap: [AppComponent],

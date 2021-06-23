@@ -1,50 +1,52 @@
-//Import Router Middleware
-const router = require('express').Router();
+import express from "express";
+const router = express.Router();
 
 //Import Token Functions
-const authToken = require('../helpers/tokenfunctions');
+const authToken = require("../helpers/tokenfunctions");
 
 //Import auth Controller functions
-const authController = require('../controllers/authController');
-
+const authController = require("../controllers/auth.controller");
 //===================================================================================================================//
 //                                      {Sign Up Endpoint}
 //===================================================================================================================//
-router.post('/signup', authController.signup);
-
+router.post("/signup", [], authController.signup);
 
 //===================================================================================================================//
 //                                      {Login Endpoint}
 //===================================================================================================================//
-router.post('/login', authController.login);
-
+router.post("/login", authController.login);
 
 //===================================================================================================================//
 //                                      {Account Activation Endpoint}
 //===================================================================================================================//
-router.post('/account-activation', authToken.verifyToken, authController.accountActivation);
-
+router.post(
+  "/account-activation",
+  authToken.verifyToken,
+  authController.accountActivation
+);
 
 //===================================================================================================================//
 //                                      {Password Reset Enpoint}
 //===================================================================================================================//
-router.post('/password-reset', authToken.verifyToken, authController.passwordReset);
-
+router.post(
+  "/password-reset",
+  authToken.verifyToken,
+  authController.passwordReset
+);
 
 //===================================================================================================================//
 //                                      {Forgot Password Endpoint}
 //===================================================================================================================//
-router.post('/forgot-password', authController.forgotPassword);
+router.post("/forgot-password", authController.forgotPassword);
 
 //===================================================================================================================//
 //                                      {drop temp-user and temp-account collection Endpoint}
 //===================================================================================================================//
-router.get('/tempaccounts', authController.tempAccounts);
+router.get("/tempaccounts", authController.tempAccounts);
 
 //===================================================================================================================//
 //                                      {drop user and account collection Endpoint}
 //===================================================================================================================//
-router.get('/mainaccounts', authController.mainAccounts);
+router.get("/mainaccounts", authController.mainAccounts);
 
-
-module.exports = router;
+export { router as authRouter };
