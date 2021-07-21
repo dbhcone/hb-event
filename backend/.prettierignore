@@ -1,0 +1,6 @@
+frontend
+node_modules
+.env
+config/default.json
+public
+package-lock.json

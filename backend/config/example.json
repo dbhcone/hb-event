@@ -1,0 +1,9 @@
+{
+  "CONNSTR": "mongodb://localhost:27017/<databasename>",
+  "SENDGRID_API_KEY": "SG.XXXXXXXXXXXXXXXXXX",
+  "SENDGRID_SINGLE_SENDER": "<emailaddressofsender>",
+  "CALLBACK_URL": "http://localhost:4200",
+  "DROPBOX_APP_KEY": "",
+  "DROPBOX_APP_SECRET": "",
+  "DROPBOX_ACCESS_TOKEN": ""
+}
