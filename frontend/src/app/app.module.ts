@@ -14,7 +14,7 @@ import { FourZeroFourComponent } from "./components/shared/four-zero-four/four-z
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { LayoutModule } from "@angular/cdk/layout";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { ChartsModule } from "ng2-charts";
+// import { ChartsModule } from "ng2-charts";
 import { NavigationComponent } from "./components/shared/navigation/navigation.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { EventsComponent } from "./components/events/events.component";
@@ -23,10 +23,10 @@ import { CartComponent } from "./components/cart/cart.component";
 import { ShoppingCartModule } from "ng-shopping-cart";
 import { PurchaseItem } from "./helpers/purchaseitem.helper";
 import { GalleryComponent } from "./components/gallery/gallery.component";
-import {UpcomingComponent} from './components/events/upcoming/upcoming.component'
+import { UpcomingComponent } from "./components/events/upcoming/upcoming.component";
 import { SuggestedComponent } from "./components/events/suggested/suggested.component";
 import { LatestComponent } from "./components/events/latest/latest.component";
-import { SwiperModule } from "swiper/angular";
+// import { SwiperModule } from "swiper/angular";
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +45,7 @@ import { SwiperModule } from "swiper/angular";
     GalleryComponent,
     UpcomingComponent,
     SuggestedComponent,
-    LatestComponent
+    LatestComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
@@ -56,7 +56,7 @@ import { SwiperModule } from "swiper/angular";
     LayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    ChartsModule,
+    // ChartsModule,
     ShoppingCartModule.forRoot({
       itemType: PurchaseItem,
       serviceType: "localStorage",
@@ -65,7 +65,7 @@ import { SwiperModule } from "swiper/angular";
         clearOnError: true,
       },
     }),
-    SwiperModule
+    // SwiperModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import 'swiper/swiper-bundle.css'
 
-import SwiperCore, {Navigation, Pagination, Scrollbar, Autoplay, A11y} from 'swiper/core';
+// import SwiperCore, {Navigation, Pagination, Scrollbar, Autoplay, A11y} from 'swiper/core';
 
-SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
+// SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 
 @Component({
   selector: 'event-latest',
