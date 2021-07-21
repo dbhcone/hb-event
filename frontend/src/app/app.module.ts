@@ -26,6 +26,7 @@ import { GalleryComponent } from "./components/gallery/gallery.component";
 import { UpcomingComponent } from "./components/events/upcoming/upcoming.component";
 import { SuggestedComponent } from "./components/events/suggested/suggested.component";
 import { LatestComponent } from "./components/events/latest/latest.component";
+import { PastComponent } from "./components/events/past/past.component";
 // import { SwiperModule } from "swiper/angular";
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { LatestComponent } from "./components/events/latest/latest.component";
     UpcomingComponent,
     SuggestedComponent,
     LatestComponent,
+    PastComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
