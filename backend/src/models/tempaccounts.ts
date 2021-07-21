@@ -1,13 +1,13 @@
 //Import Mongoose Module
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
+import mongoose, { Schema } from 'mongoose';
 
-const Schema = mongoose.Schema;
 
 //Import TempUser Schema
 const TempUser = require("./tempusers");
 
 //Define Temp Accounts Schema
-const temp_accounts_Schema = mongoose.Schema({
+const temp_accounts_Schema: Schema = new Schema({
   temp_userid: { type: mongoose.Schema.Types.ObjectId, ref: TempUser },
   user_company_name: String,
   address: String,

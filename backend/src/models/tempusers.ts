@@ -1,8 +1,8 @@
 //Import Mongoose Module
-const mongoose = require("mongoose");
+import mongoose, {Schema} from 'mongoose';
 
 //Define Temp User Schema
-const temp_users_Schema = mongoose.Schema({
+const temp_users_Schema: Schema = new Schema({
   token: String,
   expiresIn: String,
   email: String,
