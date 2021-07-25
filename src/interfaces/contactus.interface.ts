@@ -2,7 +2,7 @@ import { Document } from "mongoose";
 
 export interface IContactUs extends Document {
   name: string;
-  emaril: string;
+  email: string;
   message: string;
   user: string;
 }
