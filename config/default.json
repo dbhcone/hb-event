@@ -1,5 +1,6 @@
 {
-  "CONNSTR": "mongodb://localhost:27017/hbevent",
+  "CONNSTR_LOCAL": "mongodb://localhost:27017/hbevent",
+  "CONNSTR": "mongodb+srv://hb-events-user:pP00RDsetoM36rn3@cluster-hbevents.7qw1t.mongodb.net/hb-events?retryWrites=true&w=majority",
   "SENDGRID_API_KEY": "SG.XXXXXXXXXXXXXXXXXX",
   "SENDGRID_SINGLE_SENDER": "enoch.bonsu@azubiafrica.org",
   "CALLBACK_URL": "http://localhost:4200",
